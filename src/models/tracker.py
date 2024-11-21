@@ -4,7 +4,6 @@ from models.source import DataSource
 
 # TODO: Añadir validaciones para asegurar que las monedas en la configuración sean soportadas por API OrionxAPI
 # TODO: Probar Tracker con otras fuentes de datos
-# TODO: Implementar métodos de almacenamiento en Storage
 
 class Tracker:
 
@@ -40,7 +39,7 @@ class Tracker:
                 results.append({
                     "source": source.__class__.__name__,
                     "timestamp": datetime.datetime.now().isoformat(),
-                    "data": data
+                    "data": data["data"]
                 })
             except Exception as e:
                 print(f"Error al obtener datos de {source.__class__.__name__}: {e}")

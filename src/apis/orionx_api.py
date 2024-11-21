@@ -6,6 +6,7 @@ import time
 # Se importa la funcion hash sha512
 from hashlib import sha512
 from models.source import DataSource
+from datetime import datetime
 
 
 class OrionxAPI(DataSource):
@@ -126,21 +127,27 @@ class OrionxAPI(DataSource):
         if currencies is None:
             return {}
         
-        data = {}
-        try: 
-            for currency in currencies: 
+        standardized_data = []
+
+        for currency in currencies:
+            try: 
                 currency_data = self.get_currency(currency)
                 transform_factor = self.get_currencyTransformFactor(currency, 'CLP')
-                
-                data[currency] = {
-                    'totalBalance': currency_data['data']['currency']['myWallet']['balance'],
-                    'availableBalance': currency_data['data']['currency']['myWallet']['availableBalance'],
-                    'unconfirmedBalance': currency_data['data']['currency']['myWallet']['unconfirmedBalance'],
-                    'transformFactor': transform_factor['data']['currencyTransformFactor']['factor']
-                }
 
-            return data
-        except Exception as e:
-            print(f"Error al obtener datos: {e}")
-            return {}
+                standardized_data.append({
+                    "asset": currency,
+                    "type": "crypto",
+                    "amount": currency_data['data']['currency']['myWallet']['balance'],
+                    "currency": currency,
+                    "factor": transform_factor['data']['currencyTransformFactor']['factor'],
+                    "timestamp": datetime.now().isoformat()
+                })
+            except Exception as e:
+                print(f"Error al obtener datos: {e}")
+        
+        return {
+            "source": "OrionxAPI",
+            "data": standardized_data,
+            "timestamp": datetime.now().isoformat()
+        }
         
