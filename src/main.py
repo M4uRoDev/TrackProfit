@@ -1,7 +1,7 @@
 from apis.orionx_api import OrionxAPI
 from models.tracker import Tracker
 from utils.config_loader import ConfigLoader
-from utils.storage import SimpleStorage
+from utils.sqlite import SQLiteStorage
 
 def main():
     """
@@ -20,7 +20,7 @@ def main():
     )
 
     # Configurar almacenamiento simple #TODO: Implementar almacenamiento en base de datos
-    storage = SimpleStorage()
+    storage = SQLiteStorage()
 
     # Inicializar el Tracker con Orionx como fuente
     tracker = Tracker(

@@ -40,7 +40,7 @@ class Tracker:
                 results.append({
                     "source": source.__class__.__name__,
                     "timestamp": datetime.datetime.now().isoformat(),
-                    "data": data
+                    "data": data["data"]
                 })
             except Exception as e:
                 print(f"Error al obtener datos de {source.__class__.__name__}: {e}")
