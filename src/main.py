@@ -19,7 +19,7 @@ def main():
         api_secret=config.get_env_var("ORIONX_API_SECRET")
     )
 
-    # Configurar almacenamiento simple #TODO: Implementar almacenamiento en base de datos
+    # Configurar almacenamiento simple
     storage = SQLiteStorage()
 
     # Inicializar el Tracker con Orionx como fuente

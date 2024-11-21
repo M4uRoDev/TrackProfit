@@ -4,7 +4,6 @@ from models.source import DataSource
 
 # TODO: Añadir validaciones para asegurar que las monedas en la configuración sean soportadas por API OrionxAPI
 # TODO: Probar Tracker con otras fuentes de datos
-# TODO: Implementar métodos de almacenamiento en Storage
 
 class Tracker:
 
