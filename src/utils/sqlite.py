@@ -1,3 +1,4 @@
+import os
 import sqlite3
 
 from typing import List, Dict
@@ -12,6 +13,9 @@ class SQLiteStorage:
         Inicializa la instancia de la clase SQLiteStorage.
         :param db_path: Ruta al archivo de base de datos SQLite.
         """
+        db_folder = os.path.dirname(db_path)
+        if db_folder:
+            os.makedirs(db_folder, exist_ok=True)
         self.db_path = db_path
         self._initialize_db()
 
