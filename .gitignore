@@ -1,8 +1,21 @@
-# python structure files
-__pycache__/
+# Entorno virtual
 venv/
-*.py[cod]
 
-
-.env
+# Archivos del sistema operativo
 .DS_Store
+Thumbs.db
+
+# Archivos de configuración de IDEs
+.idea/
+.vscode/
+
+# Caché de Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Enviroment
+.env
+
+# Ignorar SQLite
+*.db
