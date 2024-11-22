@@ -1,4 +1,5 @@
 from apis.orionx_api import OrionxAPI
+from apis.fintual_api import FintualAPI
 from models.tracker import Tracker
 from utils.config_loader import ConfigLoader
 from utils.sqlite import SQLiteStorage
@@ -19,12 +20,19 @@ def main():
         api_secret=config.get_env_var("ORIONX_API_SECRET")
     )
 
+    fintual_api = FintualAPI(
+        email=config.get_env_var("FINTUAL_EMAIL"),
+        password=config.get_env_var("FINTUAL_PASSWORD")
+    )
+
+
+
     # Configurar almacenamiento simple
     storage = SQLiteStorage()
 
     # Inicializar el Tracker con Orionx como fuente
     tracker = Tracker(
-        sources=[orionx_api],
+        sources=[orionx_api, fintual_api],
         storage=storage
     )
 
